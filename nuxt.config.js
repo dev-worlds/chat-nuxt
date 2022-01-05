@@ -63,8 +63,5 @@ module.exports = {
      */
     extend(config, ctx) {
     }
-  },
-  proxy: {
-    '/api/': 'http:dev-worlds.ru'
   }
 }
