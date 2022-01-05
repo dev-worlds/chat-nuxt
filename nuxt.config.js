@@ -3,6 +3,9 @@ const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 
 module.exports = {
   mode: 'universal',
+  server: {
+    host: 'dev-worlds.ru'
+  },
 
   /*
    ** Headers of the page
