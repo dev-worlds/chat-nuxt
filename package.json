@@ -18,7 +18,7 @@
     "socket.io": "^2.2.0",
     "vue-socket.io": "^3.0.7",
     "vuetify": "^1.5.5",
-    "vuetify-loader": "^1.2.2"
+    "vuetify-loader": "^1.7.2"
   },
   "devDependencies": {
     "nodemon": "^1.18.9",
