@@ -2,6 +2,13 @@
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8>
       <v-card min-width="400">
+        <v-snackbar
+          v-model="snackbar"
+          timeout="6000"
+          top
+        >{{ message }}
+          <v-btn color="pink" flat @click="snackbar = false">Закрыть</v-btn>
+        </v-snackbar>
         <v-card-title><h1>Nuxt чат</h1></v-card-title>
         <v-card-text>
           <v-form
@@ -33,7 +40,6 @@
             >
               Войти
             </v-btn>
-
           </v-form>
         </v-card-text>
       </v-card>
@@ -56,6 +62,8 @@ export default {
   },
   data: () => ({
     valid: true,
+    snackbar: false,
+    message: '',
     name: '',
     nameRules: [
       v => !!v || 'Введите имя',
@@ -67,16 +75,34 @@ export default {
     ],
   }),
 
+  mounted() {
+    const {message} = this.$route.query
+    if (message === 'noUser') {
+      this.message = 'Введите данные'
+    } else if (message === 'leftChat') {
+      this.message = 'Вы вышли из чата'
+    }
+    this.snackbar = !!this.message
+  },
+
   methods: {
     ...mapMutations(['setUser']),
-    submit(e) {
+    submit() {
       if (this.$refs.form.validate()) {
         const user = {
           name: this.name,
           room: this.room
         }
-        this.setUser(user)
-        this.$router.push('/chat')
+
+        this.$socket.emit('userJoined', user, (data) => {
+          if (typeof data === 'string') {
+            console.error(data)
+          } else {
+            user.id = data.userId
+            this.setUser(user)
+            this.$router.push('/chat')
+          }
+        })
       }
     },
     reset() {
