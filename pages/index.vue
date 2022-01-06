@@ -1,7 +1,7 @@
 <template>
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8>
-      <v-card min-width="400">
+      <v-card min-width="288">
         <v-snackbar
           v-model="snackbar"
           timeout="6000"

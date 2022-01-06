@@ -40,7 +40,7 @@ io.on('connection', socket => {
     const user = users.remove(id)
     if (user) {
       io.to(user.room).emit('updateUsers', users.getByRoom(user.room))
-      io.to(user.room).emit('newMessage', m('admin', `Пользователь ${user.name}.`))
+      io.to(user.room).emit('newMessage', m('admin', `Пользователь ${user.name} вышел.`))
     }
     cb()
   })
@@ -49,7 +49,7 @@ io.on('connection', socket => {
     const user = users.remove(socket.id)
     if (user) {
       io.to(user.room).emit('updateUsers', users.getByRoom(user.room))
-      io.to(user.room).emit('newMessage', m('admin', `Пользователь ${user.name}.`))
+      io.to(user.room).emit('newMessage', m('admin', `Пользователь ${user.name} вышел.`))
     }
   })
 })

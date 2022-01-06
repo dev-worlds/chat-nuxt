@@ -34,7 +34,6 @@ export default {
     messages() {
       if (this.$refs.block) {
         setTimeout(() => {
-          console.log(this.$refs, this.$refs.block)
           if (this.$refs.block && this.$refs.block.scrollHeight) {
             this.$refs.block.scrollTop = this.$refs.block.scrollHeight
           }
