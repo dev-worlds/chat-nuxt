@@ -34,7 +34,7 @@ export default {
     messages() {
       if (this.$refs.block) {
         setTimeout(() => {
-          if (this.$refs.block.scrollHeight) {
+          if (this.$refs.block && this.$refs.block.scrollHeight) {
             this.$refs.block.scrollTop = this.$refs.block.scrollHeight
           }
         }, 0)
