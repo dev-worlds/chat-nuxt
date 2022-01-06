@@ -4,8 +4,8 @@ const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 module.exports = {
   mode: 'universal',
   server: {
-    host: 'http://127.0.0.1',
-    port: 3000
+    host: 'localhost',
+    port: 3333
   },
   /*
    ** Headers of the page
