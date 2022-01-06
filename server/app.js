@@ -1,6 +1,12 @@
+const consola = require("consola");
 const app = require('express')()
-app.listen(3000)
 const server = require('http').createServer(app)
+server.listen(3000, () => {
+  consola.ready({
+    message: `Server listening on http://localhost:3000`,
+    badge: true
+  })
+})
 const io = require('socket.io')(server)
 const users = require('./users')()
 
