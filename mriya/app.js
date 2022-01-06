@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer')
 const easyvk = require('easyvk')
 const keypress = require('keypress');
 
-const promocode = '.promo_code=703130261221';
+const promocode = '.promo_code=703130060122';
 const dates = '2022-07-12%3B2022-07-22';
 const url = `https://ibe.tlintegration.com/ApiWebDistribution/BookingForm/hotel_availability?include_rates=true&include_transfers=true&include_all_placements=false&include_promo_restricted=true&language=ru-ru&criterions[0].hotels[0].code=5707&criterions[0].dates=${dates}&criterions[0].adults=3&criterions[0].children=2&criterions[0]${promocode}`;
 let mriya = {},
