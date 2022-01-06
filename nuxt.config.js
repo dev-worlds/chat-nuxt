@@ -5,7 +5,7 @@ module.exports = {
   mode: 'universal',
   server: {
     host: 'localhost',
-    port: 3333
+    port: 3000
   },
   /*
    ** Headers of the page
