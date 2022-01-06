@@ -13,9 +13,11 @@ class Users {
 
   remove(id) {
     const user = this.get(id)
+
     if (user) {
       this.users = this.users.filter(user => user.id !== id)
     }
+
     return user
   }
 
@@ -24,6 +26,6 @@ class Users {
   }
 }
 
-module.exports = function () {
+module.exports = function() {
   return new Users()
 }

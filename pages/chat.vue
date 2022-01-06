@@ -3,7 +3,7 @@
     <div class="c-chat" ref="block">
       <Message
         v-for="m in messages"
-        :key="m.messageId"
+        :key="m.text"
         :name="m.name"
         :text="m.text"
         :owner="m.id === user.id"
@@ -16,30 +16,26 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import { mapState } from "vuex";
 import Message from "@/components/Message";
-import ChatForm from "../components/ChatForm";
-
+import ChatForm from "@/components/ChatForm";
 export default {
-  name: "chat",
-  middleware: ['chat'],
+  middleware: ["chat"],
   head() {
     return {
       title: `Комната ${this.user.room}`
-    }
+    };
   },
-  components: {Message, ChatForm},
-  computed: mapState(['user', 'messages']),
+  components: { Message, ChatForm },
+  computed: mapState(["user", "messages"]),
   watch: {
     messages() {
-      if (this.$refs.block) {
-        setTimeout(() => {
-          this.$refs.block.scrollTop = this.$refs.block.scrollHeight
-        }, 0)
-      }
+      setTimeout(() => {
+        this.$refs.block.scrollTop = this.$refs.block.scrollHeight;
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -69,3 +65,5 @@ export default {
   overflow-y: auto;
 }
 </style>
+
+

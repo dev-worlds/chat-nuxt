@@ -3,10 +3,9 @@ const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 const users = require('./users')()
 
-const m = (name, text, id) => ({name, text, id})
+const m = (name, text, id) => ({ name, text, id })
 
 io.on('connection', socket => {
-
   socket.on('userJoined', (data, cb) => {
     if (!data.name || !data.room) {
       return cb('Данные некорректны')
@@ -16,19 +15,24 @@ io.on('connection', socket => {
 
     users.remove(socket.id)
     users.add({
-      id: socket.id, name: data.name, room: data.room
+      id: socket.id,
+      name: data.name,
+      room: data.room
     })
 
-    cb({userId: socket.id})
+    cb({ userId: socket.id })
     io.to(data.room).emit('updateUsers', users.getByRoom(data.room))
-    socket.emit('newMessage', m('admin', `Добро пожаловать ${data.name}`))
-    socket.broadcast.to(data.room).emit('newMessage', m('admin', `Пользователь ${data.name} зашёл.`))
+    socket.emit('newMessage', m('admin', `Добро пожаловать ${data.name}.`))
+    socket.broadcast
+      .to(data.room)
+      .emit('newMessage', m('admin', `Пользователь ${data.name} зашел.`))
   })
 
   socket.on('createMessage', (data, cb) => {
     if (!data.text) {
       return cb('Текст не может быть пустым')
     }
+
     const user = users.get(data.id)
     if (user) {
       io.to(user.room).emit('newMessage', m(user.name, data.text, data.id))
@@ -40,7 +44,10 @@ io.on('connection', socket => {
     const user = users.remove(id)
     if (user) {
       io.to(user.room).emit('updateUsers', users.getByRoom(user.room))
-      io.to(user.room).emit('newMessage', m('admin', `Пользователь ${user.name}.`))
+      io.to(user.room).emit(
+        'newMessage',
+        m('admin', `Пользователь ${user.name} вышел.`)
+      )
     }
     cb()
   })
@@ -49,11 +56,15 @@ io.on('connection', socket => {
     const user = users.remove(socket.id)
     if (user) {
       io.to(user.room).emit('updateUsers', users.getByRoom(user.room))
-      io.to(user.room).emit('newMessage', m('admin', `Пользователь ${user.name}.`))
+      io.to(user.room).emit(
+        'newMessage',
+        m('admin', `Пользователь ${user.name} вышел.`)
+      )
     }
   })
 })
 
 module.exports = {
-  app, server
+  app,
+  server
 }
