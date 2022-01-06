@@ -1,4 +1,5 @@
 const app = require('express')()
+app.listen(3000)
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 const users = require('./users')()
