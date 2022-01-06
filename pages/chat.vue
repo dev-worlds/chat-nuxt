@@ -32,9 +32,11 @@ export default {
   computed: mapState(['user', 'messages']),
   watch: {
     messages() {
-      if (this.$refs.block.scrollHeight) {
+      if (this.$refs.block) {
         setTimeout(() => {
-          this.$refs.block.scrollTop = this.$refs.block.scrollHeight
+          if (this.$refs.block.scrollHeight) {
+            this.$refs.block.scrollTop = this.$refs.block.scrollHeight
+          }
         }, 0)
       }
     }
