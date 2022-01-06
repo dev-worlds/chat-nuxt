@@ -1,4 +1,4 @@
-const consola = require("consola");
+const consola = require("consola")
 const app = require('express')()
 const server = require('http').createServer(app)
 server.listen(3000, () => {
