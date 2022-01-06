@@ -5,7 +5,7 @@ export default function({ store }) {
   Vue.use(
     new VueSocketIO({
       debug: false,
-      connection: '89.108.81.123',
+      connection: 'dev-worlds.ru',
       vuex: {
         store,
         actionPrefix: 'SOCKET_',
